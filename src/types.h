@@ -3,9 +3,9 @@
 
 #define PLAYER_COUNT 4
 #define BOARD_SIZE 40
+#define GO_REWARD 2000
 
-typedef enum
-{
+typedef enum {
     GO,
     PROPERTY,
     EVENT,
@@ -19,8 +19,7 @@ typedef enum
     GO_TO_JAIL
 } SquareType;
 
-typedef enum
-{
+typedef enum {
     NO_GROUP,
     BROWN,
     LIGHT_BLUE,
@@ -32,19 +31,23 @@ typedef enum
     DARK_BLUE
 } PropertyGroup;
 
-typedef struct
-{
+typedef struct {
     int id;
     int position;
     int cash;
 } Player;
 
-typedef struct
-{
+typedef struct {
     int index;
     char name[40];
     SquareType type;
     PropertyGroup group;
 } Square;
+
+typedef struct {
+    int dice1;
+    int dice2;
+    int total;
+} Dice;
 
 #endif
