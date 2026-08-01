@@ -9,13 +9,9 @@ int main(void) {
     srand(time(NULL)); //to avoid getting the same sequence
     
     Game game;
-    initializeGame(&game);
-    
-    Dice dice = rollDice();
 
-    printf("Dice 1 : %d\n", dice.dice1);
-    printf("Dice 2 : %d\n", dice.dice2);
-    printf("Total  : %d\n", dice.total);
+    initializeGame(&game);
+    playGame(&game);
 
     return 0;
 }

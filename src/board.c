@@ -6,7 +6,7 @@ static const Square BOARD_TEMPLATE[BOARD_SIZE] = {
     //index, name, type, group
     {0, "GO", GO, NO_GROUP}, // simpler than using the dot operator
     {1, "Pettah", PROPERTY, BROWN},
-    {2, "Community Development Fund", EVENT, EVENT},
+    {2, "Community Development Fund", EVENT, NO_GROUP},
     {3, "Maradana", PROPERTY, BROWN},
     {4, "Income Tax", TAX, NO_GROUP},
     {5, "Colombo Fort Railway Station", RAILWAY, NO_GROUP},

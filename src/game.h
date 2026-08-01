@@ -19,4 +19,6 @@ so the modifications remain even after the function ends
 
 Dice rollDice(void); //A funtion that returns Dice structure
 
+void playGame(Game *game);
+
 #endif

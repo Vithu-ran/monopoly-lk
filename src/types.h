@@ -33,6 +33,7 @@ typedef enum {
 
 typedef struct {
     int id;
+    char *name;
     int position;
     int cash;
 } Player;
