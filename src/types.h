@@ -43,7 +43,6 @@ typedef struct
 {
     int index;
     char name[40];
-
     SquareType type;
     PropertyGroup group;
 } Square;
