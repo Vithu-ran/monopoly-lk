@@ -14,7 +14,7 @@ static const Square BOARD_TEMPLATE[BOARD_SIZE] = {
     {7, "National Event Card", EVENT, NO_GROUP},
     {8, "Wellawatte", PROPERTY, LIGHT_BLUE},
     {9, "Mount Lavinia", PROPERTY, LIGHT_BLUE},
-    {10, "Jail / Just Visiting", JAIL, NO_GROUP}, // Special type = JAIL
+    {10, "Jail (Just visiting)", JAIL, NO_GROUP}, // Special type = JAIL
     {11, "Nugegoda", PROPERTY, PINK},
     {12, "Ceylon Electricity Board", UTILITY, NO_GROUP},
     {13, "Maharagama", PROPERTY, PINK},

@@ -121,12 +121,22 @@ void takeTurn(Game *game, Player *player) {
         printf("Collected LKR %d.\n", GO_REWARD);
         printf("Current Balance : LKR %d.\n", player->cash);
     }
-
-    Square *square = &game->board[player->position];
 }
 
 void handleLanding(Game *game, Player *player) {
     Square *square = &game->board[player->position];
+
+    printf("\n%s landed on %s.\n", player->name, square->name);
+
+    switch(square->type) {
+        case PROPERTY:
+            printf("This is a Property.\n");
+            break;
+        
+        case RAILWAY:
+            printf("This is a Railway Station.\n");
+            break;
+    }
 }
 
 void playGame(Game *game) {
@@ -144,8 +154,6 @@ void playGame(Game *game) {
         int currentPlayerIndex = (firstPlayer + i) % PLAYER_COUNT;
 
         takeTurn(game, &game->players[currentPlayerIndex]);
+        handleLanding(game, &game->players[currentPlayerIndex]);
     }
-
-    
-
 }
