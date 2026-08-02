@@ -19,6 +19,8 @@ the game attributes must be changing throughout the game
 so the modifications remain even after the function ends
 */
 
+void printIntroduction(const Game *game);
+
 Dice rollDice(void); //A funtion that returns Dice structure
 
 int determineFirstPlayer(Game *game); // returning the index of the first player

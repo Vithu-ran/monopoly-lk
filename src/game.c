@@ -7,6 +7,14 @@ void initializeGame(Game *game) {
     initializePlayers(game->players);
 }
 
+void printIntroduction(const Game *game) { // const - to void accidental edits
+    printf("\nMONOPOLY-LK Simulation\n\n");
+    for(int i = 0; i < PLAYER_COUNT; i++) {
+        printf("Player %d : %s\n", i + 1, game->players[i].name);
+    }
+    printf("\nEach player begins with LKR 30,000\n\n");
+}
+
 Dice rollDice(void) {
     Dice dice;
 
@@ -94,6 +102,9 @@ void printTurnOrder(Game *game, int firstPlayer) {
 }
 
 void playGame(Game *game) {
+
+    printIntroduction(game);
+
     int firstPlayer = determineFirstPlayer(game);
     printf("\n%s will begin the game.\n", game->players[firstPlayer].name);
 
