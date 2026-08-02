@@ -121,10 +121,12 @@ void takeTurn(Game *game, Player *player) {
         printf("Collected LKR %d.\n", GO_REWARD);
         printf("Current Balance : LKR %d.\n", player->cash);
     }
+
+    Square *square = &game->board[player->position];
 }
 
 void handleLanding(Game *game, Player *player) {
-    
+    Square *square = &game->board[player->position];
 }
 
 void playGame(Game *game) {

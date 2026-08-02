@@ -11,6 +11,7 @@ int main(void) {
     Game game;
 
     initializeGame(&game);
+    
     playGame(&game);
 
     return 0;
