@@ -101,6 +101,18 @@ void printTurnOrder(Game *game, int firstPlayer) {
     }
 }
 
+void takeTurn(Game *game, Player *player) {
+    printf("\n----------------------------------------\n");
+    printf("%s's Turn\n", player->name);
+    printf("----------------------------------------\n");
+
+    Dice dice = rollDice();
+
+    printf("%s rolled %d.\n", player->name, dice.total);
+
+    
+}
+
 void playGame(Game *game) {
 
     printIntroduction(game);
@@ -111,4 +123,11 @@ void playGame(Game *game) {
 
     printf("\nTurn order:\n");
     printTurnOrder(game, firstPlayer);
+
+    for(int i = 0; i < PLAYER_COUNT; i++) {
+        int currentPlayerIndex = (firstPlayer + i) % PLAYER_COUNT;
+
+        takeTurn(game, &game->players[currentPlayerIndex]);
+    }
+
 }
