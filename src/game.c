@@ -129,12 +129,52 @@ void handleLanding(Game *game, Player *player) {
     printf("\n%s landed on %s.\n", player->name, square->name);
 
     switch(square->type) {
+        case GO:
+            // printf("This is GO.\n");
+            break;
+
         case PROPERTY:
             printf("This is a Property.\n");
             break;
         
         case RAILWAY:
             printf("This is a Railway Station.\n");
+            break;
+
+        case EVENT:
+            printf("This is an Event square.\n");
+            break;
+
+        case TAX:
+            printf("This is Income Tax.\n");
+            break;
+
+        case UTILITY:
+            printf("This is a Utility.\n");
+            break;
+
+        case BANK:
+            printf("This is a Bank.\n");
+            break;
+
+        case INSURANCE:
+            printf("This is a Insurance Company.\n");
+            break;
+
+        case JAIL:
+            printf("This is jail.\n");
+            break;
+
+        case FREE_PARKING:
+            printf("This is Free Parking.\n");
+            break;
+
+        case GO_TO_JAIL:
+            printf("This is Go To Jail.\n");
+            break;
+
+        default:
+            printf("Unknown square type.\n")    ;
             break;
     }
 }

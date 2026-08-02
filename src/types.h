@@ -43,6 +43,11 @@ typedef struct {
     char name[40];
     SquareType type;
     PropertyGroup group;
+    int purchasePrice;
+    int baseRent;
+    int owner;
+    int houses;
+    int hotel;
 } Square;
 
 typedef struct {
