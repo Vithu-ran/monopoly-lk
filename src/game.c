@@ -21,8 +21,9 @@ Dice rollDice(void) {
 int determineFirstPlayer(Game *game) {
     int highestPlayer = 0;
     int highestRoll = 0;
-    int rolls[PLAYER_COUNT];
+    int rolls[PLAYER_COUNT]; // stores everyonr's rolls
 
+    // First rolling
     for(int i = 0; i < PLAYER_COUNT; i++) {
         Dice dice = rollDice();
         rolls[i] = dice.total;
@@ -35,28 +36,48 @@ int determineFirstPlayer(Game *game) {
         }
     }
 
-    // Tie check is only for the firs rank
+    // Tie check
     int tieCount = 0;
-    int tiedPlayers[PLAYER_COUNT];
-    int tiedIndex = 0;
+    int tiedPlayers[PLAYER_COUNT]; // Stores the indices of tied players
 
     for(int i = 0; i < PLAYER_COUNT; i++) { // checks if the highest number rolled twice
         if(rolls[i] == highestRoll) {
+            tiedPlayers[tieCount] = i; // Adds tied players to the array
             tieCount++;
         }
     }
 
     while(tieCount > 1) {
         printf("\nHighest roll tied. Rerolling...\n");
-
+        
+        int previousTiedCount = tieCount;
         highestRoll = 0;
-        tieCount = 0;
-        tiedIndex = 0;
 
         // Reroll only tied players
-        for(int i = 0; i < PLAYER_COUNT; i++) {
-            if(rolls[i] == highestRoll) {
-                // Nothing for now
+        for(int i = 0; i < previousTiedCount; i++) {
+            int tiedPlayerIndex = tiedPlayers[i];
+
+            Dice dice = rollDice(); // Rerolling the tied players
+
+            rolls[tiedPlayerIndex] = dice.total; // Adding new rolls
+
+            printf("%s rerolls %d.\n", game->players[tiedPlayerIndex].name, dice.total);
+
+            if(rolls[tiedPlayerIndex] > highestRoll) {
+                highestRoll = rolls[tiedPlayerIndex];
+                highestPlayer = tiedPlayerIndex;
+            }
+        }
+
+        // counting ties again
+        tieCount = 0;
+
+        for(int i = 0; i < previousTiedCount; i++) { // only the players who rerolled
+            int tiedPlayerIndex = tiedPlayers[i];
+
+            if(rolls[tiedPlayerIndex] == highestRoll) {
+                tiedPlayers[tieCount] = tiedPlayerIndex;
+                tieCount++;
             }
         }
     }
@@ -64,8 +85,18 @@ int determineFirstPlayer(Game *game) {
     return highestPlayer;
 }
 
+void printTurnOrder(Game *game, int firstPlayer) {
+    for(int i = 0; i < PLAYER_COUNT; i++) {
+        int currentPlayer = (firstPlayer + i) % PLAYER_COUNT;
+
+        printf("%s\n", game->players[currentPlayer].name);
+    }
+}
+
 void playGame(Game *game) {
     int firstPlayer = determineFirstPlayer(game);
+    printf("\n%s will begin the game.\n", game->players[firstPlayer].name);
 
-    // printf("\n%s will begin the game.\n", game->players[firstPlayer].name);
+    printf("\nTurn order:\n");
+    printTurnOrder(game, firstPlayer);
 }

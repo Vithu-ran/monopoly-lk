@@ -23,6 +23,8 @@ Dice rollDice(void); //A funtion that returns Dice structure
 
 int determineFirstPlayer(Game *game); // returning the index of the first player
 
+void printTurnOrder(Game *game, int firstPlayer);
+
 void playGame(Game *game);
 
 #endif
