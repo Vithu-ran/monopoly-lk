@@ -17,18 +17,47 @@ Dice rollDice(void) {
     return dice;
 }
 
+// finding who starts the game
 int determineFirstPlayer(Game *game) {
     int highestPlayer = 0;
     int highestRoll = 0;
+    int rolls[PLAYER_COUNT];
 
     for(int i = 0; i < PLAYER_COUNT; i++) {
         Dice dice = rollDice();
+        rolls[i] = dice.total;
 
         printf("%s rolls %d.\n", game->players[i].name, dice.total);
 
-        if(dice.total > highestRoll) {
-            highestRoll = dice.total;
+        if(rolls[i] > highestRoll) {
+            highestRoll = rolls[i];
             highestPlayer = i;
+        }
+    }
+
+    // Tie check is only for the firs rank
+    int tieCount = 0;
+    int tiedPlayers[PLAYER_COUNT];
+    int tiedIndex = 0;
+
+    for(int i = 0; i < PLAYER_COUNT; i++) { // checks if the highest number rolled twice
+        if(rolls[i] == highestRoll) {
+            tieCount++;
+        }
+    }
+
+    while(tieCount > 1) {
+        printf("\nHighest roll tied. Rerolling...\n");
+
+        highestRoll = 0;
+        tieCount = 0;
+        tiedIndex = 0;
+
+        // Reroll only tied players
+        for(int i = 0; i < PLAYER_COUNT; i++) {
+            if(rolls[i] == highestRoll) {
+                // Nothing for now
+            }
         }
     }
 
@@ -36,17 +65,7 @@ int determineFirstPlayer(Game *game) {
 }
 
 void playGame(Game *game) {
-    // for(int i = 0; i < PLAYER_COUNT; i++) { //temporary because the turn order isn't fixed
-    //     Dice dice = rollDice();
-
-    //     printf("%s rolled %d.\n", game->players[i].name, dice.total);
-
-    //     movePlayer(&game->players[i], dice.total);
-
-    //     printf("%s is now on Square %d.\n\n", game->players[i].name, game->players[i].position);
-    // }
-
     int firstPlayer = determineFirstPlayer(game);
 
-    printf("\n%s will begin the game.\n", game->players[firstPlayer].name);
+    // printf("\n%s will begin the game.\n", game->players[firstPlayer].name);
 }
