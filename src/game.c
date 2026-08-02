@@ -107,10 +107,12 @@ void takeTurn(Game *game, Player *player) {
     printf("----------------------------------------\n");
 
     Dice dice = rollDice();
-
     printf("%s rolled %d.\n", player->name, dice.total);
 
-    
+    int oldPosition = player->position;
+
+    movePlayer(player, dice.total);
+    printf("%s moves from Square %d to Square %d.\n", player->name, oldPosition, player->position);
 }
 
 void playGame(Game *game) {
