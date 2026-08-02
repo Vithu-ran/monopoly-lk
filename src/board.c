@@ -14,7 +14,7 @@ static const Square BOARD_TEMPLATE[BOARD_SIZE] = {
     {7, "National Event Card", EVENT, NO_GROUP},
     {8, "Wellawatte", PROPERTY, LIGHT_BLUE},
     {9, "Mount Lavinia", PROPERTY, LIGHT_BLUE},
-    {10, "Jail / Just Visiting", JAIL, NO_GROUP},
+    {10, "Jail / Just Visiting", JAIL, NO_GROUP}, // Special type = JAIL
     {11, "Nugegoda", PROPERTY, PINK},
     {12, "Ceylon Electricity Board", UTILITY, NO_GROUP},
     {13, "Maharagama", PROPERTY, PINK},
@@ -24,7 +24,7 @@ static const Square BOARD_TEMPLATE[BOARD_SIZE] = {
     {17, "Sri Lanka Insurance", INSURANCE, NO_GROUP},
     {18, "Katunayake", PROPERTY, ORANGE},
     {19, "Ja-Ela", PROPERTY, ORANGE},
-    {20, "Free Parking", FREE_PARKING, NO_GROUP},
+    {20, "Free Parking", FREE_PARKING, NO_GROUP}, // Special type = FREE_PARKING
     {21, "Kandy City", PROPERTY, RED},
     {22, "National Event Card", EVENT, NO_GROUP},
     {23, "Peradeniya", PROPERTY, RED},
@@ -34,7 +34,7 @@ static const Square BOARD_TEMPLATE[BOARD_SIZE] = {
     {27, "Unawatuna", PROPERTY, YELLOW},
     {28, "National Water Supply and Drainage Board", UTILITY, NO_GROUP},
     {29, "Hikkaduwa", PROPERTY, YELLOW},
-    {30, "Go To Jail", GO_TO_JAIL, NO_GROUP},
+    {30, "Go To Jail", GO_TO_JAIL, NO_GROUP}, // Special type = GO_TO_JAIL
     {31, "Jaffna Town", PROPERTY, GREEN},
     {32, "Nallur", PROPERTY, GREEN},
     {33, "Ceylinco Insurance", INSURANCE, NO_GROUP},

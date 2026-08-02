@@ -8,7 +8,9 @@
 typedef struct {
     Square board[BOARD_SIZE]; // Every game has its own board
     Player players[PLAYER_COUNT];
+    int turnOrder[PLAYER_COUNT]; // Stores index of the players array 
 } Game;
+
 
 void initializeGame(Game *game);
 /* POIINTER
@@ -18,6 +20,8 @@ so the modifications remain even after the function ends
 */
 
 Dice rollDice(void); //A funtion that returns Dice structure
+
+int determineFirstPlayer(Game *game); // returning the index of the first player
 
 void playGame(Game *game);
 

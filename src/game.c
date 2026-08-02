@@ -17,14 +17,36 @@ Dice rollDice(void) {
     return dice;
 }
 
-void playGame(Game *game) {
-    for(int i = 0; i < PLAYER_COUNT; i++) { //temporary because the turn order isn't fixed
+int determineFirstPlayer(Game *game) {
+    int highestPlayer = 0;
+    int highestRoll = 0;
+
+    for(int i = 0; i < PLAYER_COUNT; i++) {
         Dice dice = rollDice();
 
-        printf("%s rolled %d.\n", game->players[i].name, dice.total);
+        printf("%s rolls %d.\n", game->players[i].name, dice.total);
 
-        movePlayer(&game->players[i], dice.total);
-
-        printf("%s is now on Square %d.\n\n", game->players[i].name, game->players[i].position);
+        if(dice.total > highestRoll) {
+            highestRoll = dice.total;
+            highestPlayer = i;
+        }
     }
+
+    return highestPlayer;
+}
+
+void playGame(Game *game) {
+    // for(int i = 0; i < PLAYER_COUNT; i++) { //temporary because the turn order isn't fixed
+    //     Dice dice = rollDice();
+
+    //     printf("%s rolled %d.\n", game->players[i].name, dice.total);
+
+    //     movePlayer(&game->players[i], dice.total);
+
+    //     printf("%s is now on Square %d.\n\n", game->players[i].name, game->players[i].position);
+    // }
+
+    int firstPlayer = determineFirstPlayer(game);
+
+    printf("\n%s will begin the game.\n", game->players[firstPlayer].name);
 }
