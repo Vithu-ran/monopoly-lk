@@ -29,6 +29,8 @@ void printTurnOrder(Game *game, int firstPlayer);
 
 void takeTurn(Game *game, Player *player);
 
+void handleLanding(Game *game, Player *player);
+
 void playGame(Game *game);
 
 #endif

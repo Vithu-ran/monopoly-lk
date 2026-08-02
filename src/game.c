@@ -101,6 +101,7 @@ void printTurnOrder(Game *game, int firstPlayer) {
     }
 }
 
+// Handles a player's turn and output messages
 void takeTurn(Game *game, Player *player) {
     printf("\n----------------------------------------\n");
     printf("%s's Turn\n", player->name);
@@ -112,7 +113,18 @@ void takeTurn(Game *game, Player *player) {
     int oldPosition = player->position;
 
     movePlayer(player, dice.total);
+
     printf("%s moves from Square %d to Square %d.\n", player->name, oldPosition, player->position);
+
+    if(player->position < oldPosition) {
+        printf("%s passed GO.\n", player->name);
+        printf("Collected LKR %d.\n", GO_REWARD);
+        printf("Current Balance : LKR %d.\n", player->cash);
+    }
+}
+
+void handleLanding(Game *game, Player *player) {
+    
 }
 
 void playGame(Game *game) {
@@ -131,5 +143,7 @@ void playGame(Game *game) {
 
         takeTurn(game, &game->players[currentPlayerIndex]);
     }
+
+    
 
 }

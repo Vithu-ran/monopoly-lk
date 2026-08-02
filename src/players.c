@@ -13,7 +13,7 @@ void initializePlayers(Player players[]) {
     players[3].name = "Opportunistic Trader";
 }
 
-void movePlayer(Player *player, int steps) {
+void movePlayer(Player *player, int steps) { // updating the player's state only
     int newPosition = player->position + steps;
 
     if(newPosition >= BOARD_SIZE) {
