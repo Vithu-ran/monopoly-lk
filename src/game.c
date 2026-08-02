@@ -12,7 +12,7 @@ void printIntroduction(const Game *game) { // const - to void accidental edits
     for(int i = 0; i < PLAYER_COUNT; i++) {
         printf("Player %d : %s\n", i + 1, game->players[i].name);
     }
-    printf("\nEach player begins with LKR 30,000\n\n");
+    printf("\nEach player begins with LKR %d.\n\n", game->players[0].cash);
 }
 
 Dice rollDice(void) {
@@ -105,6 +105,7 @@ void playGame(Game *game) {
 
     printIntroduction(game);
 
+    printf("Rolling...\n\n");
     int firstPlayer = determineFirstPlayer(game);
     printf("\n%s will begin the game.\n", game->players[firstPlayer].name);
 

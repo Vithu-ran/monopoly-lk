@@ -1,4 +1,5 @@
 #include "players.h"
+#include "types.h"
 
 void initializePlayers(Player players[]) {
     for(int i = 0; i < PLAYER_COUNT; i++) {

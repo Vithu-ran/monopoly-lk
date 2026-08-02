@@ -27,6 +27,8 @@ int determineFirstPlayer(Game *game); // returning the index of the first player
 
 void printTurnOrder(Game *game, int firstPlayer);
 
+void takeTurn(Game *game, Player *player);
+
 void playGame(Game *game);
 
 #endif
