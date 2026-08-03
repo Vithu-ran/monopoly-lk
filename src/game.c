@@ -140,7 +140,8 @@ void handleLanding(Game *game, Player *player) {
             break;
         
         case RAILWAY:
-            printf("This is a Railway Station.\n");
+            // printf("This is a Railway Station.\n");
+            handleRailway(game, player);
             break;
 
         case EVENT:
@@ -210,6 +211,12 @@ void handleProperty(Game *game, Player *player) {
             printf("%s Balance: LKR %d\n", owner->name, owner->cash);
         }
     }
+}
+
+void handleRailway(Game *game, Player *player) {
+    Square *square = &game->board[player->position];
+
+    printf("%s is a Railway.\n", square->name);
 }
 
 void handleAuction(Game *game, Square *square) {

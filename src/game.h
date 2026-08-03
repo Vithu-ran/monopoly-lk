@@ -33,6 +33,8 @@ void handleLanding(Game *game, Player *player);
 
 void handleProperty(Game *game, Player *player);
 
+void handleRailway(Game *game, Player *player);
+
 void handleAuction(Game *game, Square *square);
 
 void playGame(Game *game);
