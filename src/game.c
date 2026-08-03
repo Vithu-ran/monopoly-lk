@@ -193,6 +193,7 @@ void handleProperty(Game *game, Player *player) {
             printf("Remaining Balance: LKR %d.\n", player->cash);
         } else {
             printf("%s cannot afford %s.\n",player->name, square->name);
+            handleAuction(game, square);
         }
     } else {
         if(square->owner == player->id) {
@@ -203,8 +204,16 @@ void handleProperty(Game *game, Player *player) {
             Player *owner = &game->players[square->owner]; // we can directly write owner->name without searching through all players
             player->cash -= rent;
             owner->cash += rent;
+
+            printf("%s paid LKR %d to %s.\n", player->name, rent, owner->name);
+            printf("%s Balance: LKR %d\n", player->name, player->cash);
+            printf("%s Balance: LKR %d\n", owner->name, owner->cash);
         }
     }
+}
+
+void handleAuction(Game *game, Square *square) {
+    printf("%s is going to auction.\n", square->name);
 }
 
 void playGame(Game *game) {
