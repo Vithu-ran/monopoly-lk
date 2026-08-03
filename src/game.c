@@ -202,6 +202,8 @@ void handleProperty(Game *game, Player *player) {
         } else {
             int rent = square->baseRent;
 
+            printf("%s is owned by another player.\n", square->name);
+
             Player *owner = &game->players[square->owner]; // we can directly write owner->name without searching through all players
             player->cash -= rent;
             owner->cash += rent;
@@ -216,7 +218,37 @@ void handleProperty(Game *game, Player *player) {
 void handleRailway(Game *game, Player *player) {
     Square *square = &game->board[player->position];
 
-    printf("%s is a Railway.\n", square->name);
+    if(square->owner == -1) {
+        if(player->cash > square->purchasePrice) {
+            player->cash -= square->purchasePrice;
+            square->owner = player->id;
+
+            printf("%s purchased %s for LKR %d.\n", player->name, square->name, square->purchasePrice);
+            printf("Remaining Balance: LKR %d.\n", player->cash);
+        } else {
+            printf("%s cannot afford %s.\n",player->name, square->name);
+            handleAuction(game, square);
+        }
+    } else {
+        if(square->owner == player->id) {
+            printf("%s already owns %s.\n", player->name, square->name);
+        } else {
+            printf("%s is owned by another player.\n", square->name);
+
+            int railwayCount = 0; // how many railways does a player own
+
+            for(int i = 0; i < BOARD_SIZE; i++) {
+                if(game->board[i].type == RAILWAY) {
+                    if(game->board[i].owner == square->owner) {
+                        railwayCount++;
+                    }
+                }
+            }
+
+            int railwayRent[] = {0, 250, 500, 1000, 2000}; // this is better than implementing a switch statement
+            int rent = railwayRent[railwayCount];
+        }
+    }
 }
 
 void handleAuction(Game *game, Square *square) {
