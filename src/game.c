@@ -218,7 +218,7 @@ void handleProperty(Game *game, Player *player) {
 void handleRailway(Game *game, Player *player) {
     Square *square = &game->board[player->position];
 
-    if(square->owner == -1) {
+    if(square->owner == -11) {
         if(player->cash > square->purchasePrice) {
             player->cash -= square->purchasePrice;
             square->owner = player->id;
@@ -247,6 +247,14 @@ void handleRailway(Game *game, Player *player) {
 
             int railwayRent[] = {0, 250, 500, 1000, 2000}; // this is better than implementing a switch statement
             int rent = railwayRent[railwayCount];
+
+            Player *owner = &game->players[square->owner]; // increases readability
+
+            player->cash -= rent;
+            owner->cash += rent;
+
+            printf("%s paid LKR %d to %s.\n", player->name, rent, owner->name);
+            printf("%s's Remaining Balance: LKR %d.\n", player->name, player->cash);
         }
     }
 }
