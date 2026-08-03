@@ -4,6 +4,7 @@
 #include "types.h"
 
 void initializeBoard(Square board[]);
+
 void printBoard(const Square board[]); //const - to avoid modifying the board
 
 #endif

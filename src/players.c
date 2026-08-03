@@ -3,7 +3,7 @@
 
 void initializePlayers(Player players[]) {
     for(int i = 0; i < PLAYER_COUNT; i++) {
-        players[i].id = i + 1;
+        players[i].id = i;
         players[i].position = 0;
         players[i].cash = 30000;
     }

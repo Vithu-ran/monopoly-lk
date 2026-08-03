@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "game.h"
+#include "board.h"
 
 void initializeGame(Game *game) {
     initializeBoard(game->board);
@@ -95,9 +96,9 @@ int determineFirstPlayer(Game *game) {
 
 void printTurnOrder(Game *game, int firstPlayer) {
     for(int i = 0; i < PLAYER_COUNT; i++) {
-        int currentPlayer = (firstPlayer + i) % PLAYER_COUNT;
+        int currentPlayerIndex = (firstPlayer + i) % PLAYER_COUNT;
 
-        printf("%s\n", game->players[currentPlayer].name);
+        printf("%s\n", game->players[currentPlayerIndex].name);
     }
 }
 
@@ -134,7 +135,8 @@ void handleLanding(Game *game, Player *player) {
             break;
 
         case PROPERTY:
-            printf("This is a Property.\n");
+            // printf("This is a Property.\n");
+            handleProperty(game, player);
             break;
         
         case RAILWAY:
@@ -176,6 +178,24 @@ void handleLanding(Game *game, Player *player) {
         default:
             printf("Unknown square type.\n")    ;
             break;
+    }
+}
+
+void handleProperty(Game *game, Player *player) {
+    Square *square = &game->board[player->position];
+
+    if(square->owner == -1) {
+        if (player->cash >= square->purchasePrice) {
+            player->cash -= square->purchasePrice;
+            square->owner = player->id;
+            
+            printf("%s purchased %s for LKR %d.\n", player->name, square->name, square->purchasePrice);
+            printf("Remaining Balance: LKR %d.\n", player->cash);
+        } else {
+            printf("%s cannot afford %s.\n",player->name, square->name);
+        }
+    } else {
+        printf("%s is already owned.\n", square->name);
     }
 }
 
