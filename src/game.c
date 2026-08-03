@@ -195,7 +195,15 @@ void handleProperty(Game *game, Player *player) {
             printf("%s cannot afford %s.\n",player->name, square->name);
         }
     } else {
-        printf("%s is already owned.\n", square->name);
+        if(square->owner == player->id) {
+            printf("%s already owns %s.\n", player->name, square->name);
+        } else {
+            int rent = square->baseRent;
+
+            Player *owner = &game->players[square->owner]; // we can directly write owner->name without searching through all players
+            player->cash -= rent;
+            owner->cash += rent;
+        }
     }
 }
 
