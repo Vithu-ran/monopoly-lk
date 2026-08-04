@@ -33,26 +33,6 @@ void takeTurn(Game *game, Player *player);
 
 void handleLanding(Game *game, Player *player);
 
-void handleProperty(Game *game, Player *player);
-
-void handleRailway(Game *game, Player *player);
-
-void handleUtility(Game *game, Player *player);
-
-void handleAuction(Game *game, Square *square);
-
-int calculatePlayerAssets(Game *game, Player *player);
-
-void handleIncomeTax(Game *game, Player *player);
-
-void handleCommunityTax(Game *game, Player *player);
-
-void handleGoToJail(Game *game, Player *player);
-
-void handleJail(Game *game, Player *player);
-
-void handleFreeParking(Game *game, Player *player);
-
 void playGame(Game *game);
 
 #endif
