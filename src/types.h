@@ -36,6 +36,7 @@ typedef struct {
     char *name;
     int position;
     int cash;
+    int lastDiceRoll;
 } Player;
 
 typedef struct {

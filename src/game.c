@@ -109,6 +109,7 @@ void takeTurn(Game *game, Player *player) {
     printf("----------------------------------------\n");
 
     Dice dice = rollDice();
+    player->lastDiceRoll = dice.total;
     printf("%s rolled %d.\n", player->name, dice.total);
 
     int oldPosition = player->position;
@@ -153,7 +154,8 @@ void handleLanding(Game *game, Player *player) {
             break;
 
         case UTILITY:
-            printf("This is a Utility.\n");
+            // printf("This is a Utility.\n");
+            handleUtility(game, player);
             break;
 
         case BANK:
@@ -218,7 +220,7 @@ void handleProperty(Game *game, Player *player) {
 void handleRailway(Game *game, Player *player) {
     Square *square = &game->board[player->position];
 
-    if(square->owner == -11) {
+    if(square->owner == -1) {
         if(player->cash > square->purchasePrice) {
             player->cash -= square->purchasePrice;
             square->owner = player->id;
@@ -235,13 +237,11 @@ void handleRailway(Game *game, Player *player) {
         } else {
             printf("%s is owned by another player.\n", square->name);
 
-            int railwayCount = 0; // how many railways does a player own
+            int railwayCount = 0; // how many railways does that particular player own
 
             for(int i = 0; i < BOARD_SIZE; i++) {
-                if(game->board[i].type == RAILWAY) {
-                    if(game->board[i].owner == square->owner) {
+                if(game->board[i].type == RAILWAY && game->board[i].owner == square->owner) {
                         railwayCount++;
-                    }
                 }
             }
 
@@ -257,6 +257,53 @@ void handleRailway(Game *game, Player *player) {
             printf("%s's Remaining Balance: LKR %d.\n", player->name, player->cash);
         }
     }
+}
+
+void handleUtility(Game *game, Player *player) {
+        Square * square = &game->board[player->position];
+
+        if(square->owner == -1) {
+            if(player->cash > square->purchasePrice) {
+                player->cash -= square->purchasePrice;
+                square->owner = player->id;
+
+                printf("%s purchased %s for LKR %d.\n", player->name, square->name, square->purchasePrice);
+                printf("Remaining Balance: LKR %d.\n", player->cash);
+            } else {
+                printf("%s cannot afford %s.\n",player->name, square->name);
+                handleAuction(game, square);
+            }
+        } else {
+            if(square->owner == player->id) {
+                printf("%s already owns %s.\n", player->name, square->name);
+            } else {
+                printf("%s is owned by another player.\n", square->name);
+
+                Player *owner = &game->players[square->owner];
+
+                int utilityCount = 0;
+                for(int i = 0; i < BOARD_SIZE; i++) {
+                    if(game->board[i].type = UTILITY && game->board[i].owner == owner->id) {
+                        utilityCount++;
+                    }
+                }
+                
+                int multiplier;
+                if(utilityCount == 1) {
+                    multiplier = 4;
+                } else {
+                    multiplier = 10;
+                }
+
+                int rent = player->lastDiceRoll * multiplier;
+
+                player->cash -= rent;
+                owner->cash += rent;
+
+                printf("%s paid LKR %d to %s.\n", player->name, rent, owner->name);
+                printf("%s's Remaining Balance: LKR %d.\n", player->name, player->cash);
+            }
+        }
 }
 
 void handleAuction(Game *game, Square *square) {

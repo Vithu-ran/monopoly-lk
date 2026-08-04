@@ -35,6 +35,8 @@ void handleProperty(Game *game, Player *player);
 
 void handleRailway(Game *game, Player *player);
 
+void handleUtility(Game *game, Player *player);
+
 void handleAuction(Game *game, Square *square);
 
 void playGame(Game *game);
