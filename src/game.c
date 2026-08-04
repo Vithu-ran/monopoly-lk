@@ -170,7 +170,7 @@ void handleLanding(Game *game, Player *player) {
             break;
 
         case JAIL:
-            printf("This is jail.\n");
+            handleJail(game, player);
             break;
 
         case FREE_PARKING:
@@ -370,6 +370,10 @@ void handleCommunityTax(Game *game, Player *player) {
 void handleGoToJail(Game *game, Player *player) {
     player->position = JAIL_INDEX;
     printf("%s was sent directly to Jail.\n", player->name);
+}
+
+void handleJail(Game *game, Player *player) {
+    printf("%s is Just Visiting Jail.\n", player->name);
 }
 
 void playGame(Game *game) {

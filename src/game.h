@@ -49,6 +49,8 @@ void handleCommunityTax(Game *game, Player *player);
 
 void handleGoToJail(Game *game, Player *player);
 
+void handleJail(Game *game, Player *player);
+
 void playGame(Game *game);
 
 #endif
