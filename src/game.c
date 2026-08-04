@@ -174,7 +174,7 @@ void handleLanding(Game *game, Player *player) {
             break;
 
         case FREE_PARKING:
-            printf("This is Free Parking.\n");
+            handleFreeParking(game, player);
             break;
 
         case GO_TO_JAIL:
@@ -199,7 +199,7 @@ void handleProperty(Game *game, Player *player) {
             printf("Remaining Balance: LKR %d.\n", player->cash);
         } else {
             printf("%s cannot afford %s.\n",player->name, square->name);
-            handleAuction(game, square);
+            handleAuction(game, square); // to be implemented later
         }
     } else {
         if(square->owner == player->id) {
@@ -310,7 +310,7 @@ void handleUtility(Game *game, Player *player) {
 }
 
 void handleAuction(Game *game, Square *square) {
-    printf("%s is going to auction.\n", square->name);
+    printf("%s is going to auction.\n", square->name); // LATER
 }
 
 int calculatePlayerAssets(Game *game, Player *player) {
@@ -374,6 +374,10 @@ void handleGoToJail(Game *game, Player *player) {
 
 void handleJail(Game *game, Player *player) {
     printf("%s is Just Visiting Jail.\n", player->name);
+}
+
+void handleFreeParking(Game *game, Player *player) {
+    printf("%s is taking a break at Free Parking.\n", player->name);
 }
 
 void playGame(Game *game) {

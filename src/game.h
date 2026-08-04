@@ -51,6 +51,8 @@ void handleGoToJail(Game *game, Player *player);
 
 void handleJail(Game *game, Player *player);
 
+void handleFreeParking(Game *game, Player *player);
+
 void playGame(Game *game);
 
 #endif
