@@ -59,3 +59,16 @@ void handleAuction(Game *game, Square *square) {
     printf("%s is going to auction.\n", square->name); // LATER
 }
 
+void handleBank(Game *game, Player *player) {
+    printf("%s arrived at the Bank.\n", player->name);
+    printf("Banking services are available.\n");
+
+    // banking operations will be implemented
+}
+
+void handleInsurance(Game *game, Player *player) {
+    printf("%s arrived at the Insurance.\n", player->name);
+    printf("Insurance services are available.\n");
+
+    // insurance operations will be implemented
+}

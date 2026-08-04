@@ -3,6 +3,10 @@
 #include <time.h>
 #include "game.h"
 #include "board.h"
+#include "events.h"
+#include "actions.h"
+#include "finance.h"
+#include "players.h"
 
 #define TEST_MODE 0
 
@@ -22,14 +26,12 @@ int main(void) {
     // game.board[11].owner = 0;
     // game.board[37].owner = 0;
 
-    game.players[0].position = 30;
+    // game.players[0].position = 17;
+    game.players[0].position = 33;
+    // game.players[0].position = 38;
 
-    handleGoToJail(&game, &game.players[0]);
+    handleInsurance(&game, &game.players[0]);
 
-    printf("index - %d\n", game.players[0].position);
-    // printf("Cash: %d\n", game.players[0].cash);
-
-    // handleIncomeTax(&game, &game.players[0]);
 
 #else 
 

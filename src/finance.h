@@ -11,4 +11,8 @@ void handleCommunityTax(Game *game, Player *player);
 
 void handleAuction(Game *game, Square *square);
 
+void handleBank(Game *game, Player *player);
+
+void handleInsurance(Game *game, Player *player);
+
 #endif

@@ -4,6 +4,7 @@
 #include "board.h"
 #include "actions.h"
 #include "finance.h"
+#include "events.h"
 
 void initializeGame(Game *game) {
     initializeBoard(game->board);
@@ -148,7 +149,7 @@ void handleLanding(Game *game, Player *player) {
             break;
 
         case EVENT:
-            printf("This is an Event square.\n");
+            handleEvents(game, player);
             break;
 
         case INCOME_TAX:
@@ -164,11 +165,11 @@ void handleLanding(Game *game, Player *player) {
             break;
 
         case BANK:
-            printf("This is a Bank.\n");
+            handleBank(game, player);
             break;
 
         case INSURANCE:
-            printf("This is a Insurance Company.\n");
+            handleInsurance(game, player);
             break;
 
         case JAIL:
