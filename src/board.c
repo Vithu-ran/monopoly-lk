@@ -6,9 +6,9 @@ static const Square BOARD_TEMPLATE[BOARD_SIZE] = {
     //index, name, type, group, purchasePrice, baseRent, owner, houses, hotel
     {0, "GO", GO, NO_GROUP, 0, 0, -1, 0, 0}, // simpler than using the dot operator
     {1, "Pettah", PROPERTY, BROWN, 1500, 100, -1, 0, 0},
-    {2, "Community Development Fund", EVENT, NO_GROUP, 0, 0, -1, 0, 0},
+    {2, "Community Development Fund", COMMUNITY_DEVELOPMENT_FUND, NO_GROUP, 0, 0, -1, 0, 0},
     {3, "Maradana", PROPERTY, BROWN, 1800, 120, -1, 0, 0},
-    {4, "Income Tax", TAX, NO_GROUP, 0, 0, -1, 0, 0},
+    {4, "Income Tax", INCOME_TAX, NO_GROUP, 0, 0, -1, 0, 0},
     {5, "Colombo Fort Railway Station", RAILWAY, NO_GROUP, 2000, 0, -1, 0, 0},
     {6, "Bambalapitiya", PROPERTY, LIGHT_BLUE, 2500, 180, -1, 0, 0},
     {7, "National Event Card", EVENT, NO_GROUP, 0, 0, -1, 0, 0},

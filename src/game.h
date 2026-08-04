@@ -8,7 +8,9 @@
 typedef struct {
     Square board[BOARD_SIZE]; // Every game has its own board
     Player players[PLAYER_COUNT];
-    int turnOrder[PLAYER_COUNT]; // Stores index of the players array 
+    int turnOrder[PLAYER_COUNT]; // Stores index of the players array
+    int incomeTaxRate; // percentage
+    int communityTaxRate; //percentage
 } Game;
 
 
@@ -38,6 +40,14 @@ void handleRailway(Game *game, Player *player);
 void handleUtility(Game *game, Player *player);
 
 void handleAuction(Game *game, Square *square);
+
+int calculatePlayerAssets(Game *game, Player *player);
+
+void handleIncomeTax(Game *game, Player *player);
+
+void handleCommunityTax(Game *game, Player *player);
+
+void handleGoToJail(Game *game, Player *player);
 
 void playGame(Game *game);
 

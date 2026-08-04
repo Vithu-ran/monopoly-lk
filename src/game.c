@@ -6,6 +6,9 @@
 void initializeGame(Game *game) {
     initializeBoard(game->board);
     initializePlayers(game->players);
+
+    game->incomeTaxRate = 15; // percentage
+    game->communityTaxRate = 10; // percentage
 }
 
 void printIntroduction(const Game *game) { // const - to void accidental edits
@@ -132,16 +135,13 @@ void handleLanding(Game *game, Player *player) {
 
     switch(square->type) {
         case GO:
-            // printf("This is GO.\n");
             break;
 
         case PROPERTY:
-            // printf("This is a Property.\n");
             handleProperty(game, player);
             break;
         
         case RAILWAY:
-            // printf("This is a Railway Station.\n");
             handleRailway(game, player);
             break;
 
@@ -149,12 +149,15 @@ void handleLanding(Game *game, Player *player) {
             printf("This is an Event square.\n");
             break;
 
-        case TAX:
-            printf("This is Income Tax.\n");
+        case INCOME_TAX:
+            handleIncomeTax(game, player);
+            break;
+
+        case COMMUNITY_DEVELOPMENT_FUND:
+            handleCommunityTax(game, player);
             break;
 
         case UTILITY:
-            // printf("This is a Utility.\n");
             handleUtility(game, player);
             break;
 
@@ -175,7 +178,7 @@ void handleLanding(Game *game, Player *player) {
             break;
 
         case GO_TO_JAIL:
-            printf("This is Go To Jail.\n");
+            handleGoToJail(game, player);
             break;
 
         default:
@@ -308,6 +311,65 @@ void handleUtility(Game *game, Player *player) {
 
 void handleAuction(Game *game, Square *square) {
     printf("%s is going to auction.\n", square->name);
+}
+
+int calculatePlayerAssets(Game *game, Player *player) {
+
+    int assets = player->cash;
+
+    for(int i = 0; i < BOARD_SIZE; i++) {
+
+        Square *square = &game->board[i];
+
+        if(square->owner == player->id  && (square->type == PROPERTY || square->type == RAILWAY || square->type == UTILITY)) {
+            assets += square->purchasePrice; // will be replaced after implementiong the market conditions
+        }
+    }
+    
+    return assets;
+}
+
+void handleIncomeTax(Game *game, Player *player) {
+    int assets = calculatePlayerAssets(game, player);
+
+    int tax = (assets * game->incomeTaxRate) / 100;
+
+    printf("Total Assets : LKR %d\n", assets);
+    printf("Income Tax (%d%%) : LKR %d\n", game->incomeTaxRate, tax);
+
+    if(player->cash >= tax) {
+        player->cash -= tax;
+        
+        printf("%s paid LKR %d as Income Tax.\n", player->name, tax);
+        printf("Remaining Balance: LKR %d\n", player->cash);
+    } else {
+        printf("%s cannot pay Income Tax.\n", player->name);
+        // the amount will be added to debt (implemented later)
+    }
+}
+
+void handleCommunityTax(Game *game, Player *player) {
+    int assets = calculatePlayerAssets(game, player);
+
+    int tax = (assets * game->communityTaxRate) / 100;
+
+    printf("Total Assets : LKR %d\n", assets);
+    printf("Community Development Fund (%d%%) : LKR %d\n", game->communityTaxRate, tax);
+
+    if(player->cash >= tax) {
+        player->cash -= tax;
+        
+        printf("%s paid LKR %d as Income Tax.\n", player->name, tax);
+        printf("Remaining Balance: LKR %d\n", player->cash);
+    } else {
+        printf("%s cannot pay Community Development Fund.\n", player->name);
+        // the amount will be added to debt (implemented later)
+    }
+}
+
+void handleGoToJail(Game *game, Player *player) {
+    player->position = JAIL_INDEX;
+    printf("%s was sent directly to Jail.\n", player->name);
 }
 
 void playGame(Game *game) {

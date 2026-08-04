@@ -4,12 +4,14 @@
 #define PLAYER_COUNT 4
 #define BOARD_SIZE 40
 #define GO_REWARD 2000
+#define JAIL_INDEX 10
 
 typedef enum {
     GO,
     PROPERTY,
     EVENT,
-    TAX,
+    INCOME_TAX,
+    COMMUNITY_DEVELOPMENT_FUND,
     RAILWAY,
     UTILITY,
     BANK,
