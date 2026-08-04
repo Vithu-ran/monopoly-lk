@@ -15,4 +15,8 @@ void handleBank(Game *game, Player *player);
 
 void handleInsurance(Game *game, Player *player);
 
+int canPlayerBid(Player *player);
+
+int getAuctionBid(Game *game, Player *player, Square *square, int currentBid);
+
 #endif

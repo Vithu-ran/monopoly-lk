@@ -6,6 +6,7 @@ void initializePlayers(Player players[]) {
         players[i].id = i;
         players[i].position = 0;
         players[i].cash = 30000;
+        players[i].bankrupt = 0; // 1 = player bankrupted
     }
     players[0].name = "Aggressive Investor";
     players[1].name = "Conservative Banker";

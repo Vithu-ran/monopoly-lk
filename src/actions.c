@@ -47,7 +47,7 @@ void handleRailway(Game *game, Player *player) {
             printf("Remaining Balance: LKR %d.\n", player->cash);
         } else {
             printf("%s cannot afford %s.\n",player->name, square->name);
-            handleAuction(game, square);
+            handleAuction(game, square); // to be implemented
         }
     } else {
         if(square->owner == player->id) {
@@ -89,7 +89,7 @@ void handleUtility(Game *game, Player *player) {
             printf("Remaining Balance: LKR %d.\n", player->cash);
         } else {
             printf("%s cannot afford %s.\n",player->name, square->name);
-            handleAuction(game, square);
+            handleAuction(game, square); // will be implemented
         }
     } else {
         if(square->owner == player->id) {

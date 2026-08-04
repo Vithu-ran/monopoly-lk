@@ -39,6 +39,7 @@ typedef struct {
     int position;
     int cash;
     int lastDiceRoll;
+    int bankrupt;
 } Player;
 
 typedef struct {
