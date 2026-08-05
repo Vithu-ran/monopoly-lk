@@ -69,30 +69,6 @@ int getAuctionBid(Game *game, Player *player, Square *square, int currentBid) {
     return nextBid;
 }
 
-// void handleAuction(Game *game, Square *square) {
-//     int eligibleBidders = 0;
-//     Player *highestBidder = NULL;
-
-//     for(int i = 0; i < PLAYER_COUNT; i++) {
-//         Player *player = &game->players[i];
-
-//         if(!canPlayerBid(player)) {
-//             continue; // skips the current player
-//         }
-        
-//         eligibleBidders++;
-
-//         int bid = getAuctionBid(game, player, square, currentBid);
-        
-//     }
-
-//     if(eligibleBidders == 0) {
-//         printf("\nNo eligible bidders.\n");
-//         printf("%s remains with the bank.\n", square->name);
-//         return; // to exit without executing the whole function uselessly
-//     }
-// }
-
 void handleAuction(Game *game, Square *square) {
     printf("\nAuction started for %s.\n", square->name);
 

@@ -14,11 +14,13 @@ void handleProperty(Game *game, Player *player) {
             printf("Remaining Balance: LKR %d.\n", player->cash);
         } else {
             printf("%s cannot afford %s.\n",player->name, square->name);
-            handleAuction(game, square); // to be implemented later
+            handleAuction(game, square);
         }
     } else {
         if(square->owner == player->id) {
             printf("%s already owns %s.\n", player->name, square->name);
+
+            constructHouse(game, player, square);
         } else {
             int rent = square->baseRent;
 
@@ -47,7 +49,7 @@ void handleRailway(Game *game, Player *player) {
             printf("Remaining Balance: LKR %d.\n", player->cash);
         } else {
             printf("%s cannot afford %s.\n",player->name, square->name);
-            handleAuction(game, square); // to be implemented
+            handleAuction(game, square);
         }
     } else {
         if(square->owner == player->id) {
@@ -89,7 +91,7 @@ void handleUtility(Game *game, Player *player) {
             printf("Remaining Balance: LKR %d.\n", player->cash);
         } else {
             printf("%s cannot afford %s.\n",player->name, square->name);
-            handleAuction(game, square); // will be implemented
+            handleAuction(game, square);
         }
     } else {
         if(square->owner == player->id) {
@@ -135,4 +137,44 @@ void handleJail(Game *game, Player *player) {
 
 void handleFreeParking(Game *game, Player *player) {
     printf("%s is taking a break at Free Parking.\n", player->name);
+}
+
+int ownsMonopoly(Game *game, Player *player, PropertyGroup group) {
+    int propertyFound = 0;
+
+    for(int i = 0; i < BOARD_SIZE; i++) {
+        Square *square = &game->board[i];
+
+        if(square->group != group) { // checks the specific group
+            continue;
+        }
+
+        propertyFound = 1;
+
+        if(square->owner != player->id) {
+            return 0;
+            /*checks the ownership of th found property.
+            even if 2 property is unowned, the function will immediately return 0.
+            */
+        }
+    }
+
+    return propertyFound;
+}
+
+void constructHouse(Game *game, Player *player, Square *square) {
+    if(!ownsMonopoly(game, player, square->group)) { // if ownsMonopoly() returns 0
+        return;
+    }
+
+    if(player->cash < square->houseCost) {
+        return;
+    }
+
+    player->cash -= square->houseCost;
+    square->houses++;
+
+    printf("%s constructed a house on %s.\n", player->name, square->name);
+    printf("Construction Cost : LKR %d\n", square->houseCost);
+    printf("Remaining Balance : LKR %d\n", player->cash);
 }

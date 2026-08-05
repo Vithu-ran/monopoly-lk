@@ -20,17 +20,10 @@ int main(void) {
 
 #if TEST_MODE
 
-    // game.players[0].cash = 1000;
+    game.board[1].owner = 0;
+    game.board[3].owner = 0;
 
-    // game.board[1].owner = 0;
-    // game.board[11].owner = 0;
-    // game.board[37].owner = 0;
-
-    // game.players[0].position = 17;
-    game.players[0].position = 33;
-    // game.players[0].position = 38;
-
-    handleInsurance(&game, &game.players[0]);
+    constructHouse(&game, &game.players[0], &game.board[1]);
 
 
 #else 

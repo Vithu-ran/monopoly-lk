@@ -52,6 +52,8 @@ typedef struct {
     int owner;
     int houses;
     int hotel;
+    int houseCost;
+    int hotelCost;
 } Square;
 
 typedef struct {
