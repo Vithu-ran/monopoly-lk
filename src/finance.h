@@ -11,6 +11,8 @@ void handleCommunityTax(Game *game, Player *player);
 
 void handleAuction(Game *game, Square *square);
 
+int canTakeLoan(Game *game, Player *player);
+
 void handleBank(Game *game, Player *player);
 
 void handleInsurance(Game *game, Player *player);

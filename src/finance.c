@@ -125,6 +125,22 @@ void handleAuction(Game *game, Square *square) {
     printf("Remaining Balance : LKR %d\n", highestBidder->cash);
 }
 
+int canTakeLoan(Game *game, Player *player) {
+    if(player->loan.active) {
+        return 0;
+    }
+
+    for(int i = 0; i < BOARD_SIZE; i++) {
+        Square *square = &game->board[i];
+
+        if(square->owner == player-> id && (square->type == PROPERTY || square->type == RAILWAY || square->type == UTILITY)) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 void handleBank(Game *game, Player *player) {
     printf("%s arrived at the Bank.\n", player->name);
     printf("Banking services are available.\n");
