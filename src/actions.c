@@ -181,11 +181,11 @@ int canBuildHouse(Game *game, Square *square /*the square that the player is sta
 }
 
 void constructHouse(Game *game, Player *player, Square *square) {
-    if(!ownsMonopoly(game, player, square->group)) { // if ownsMonopoly() returns 0
+    if(!ownsMonopoly(game, player, square->group)) { // monopoly check
         return;
     }
 
-    if(!canBuildHouse(game, square)) { // if can't build house
+    if(!canBuildHouse(game, square)) { // even building check
         return;
     }
 
@@ -193,7 +193,7 @@ void constructHouse(Game *game, Player *player, Square *square) {
         return;
     }
 
-    if(player->cash < square->houseCost) { // if not enough cash
+    if(player->cash < square->houseCost) { // cash check
         return;
     }
 
@@ -203,4 +203,25 @@ void constructHouse(Game *game, Player *player, Square *square) {
     printf("%s constructed a house on %s.\n", player->name, square->name);
     printf("Construction Cost : LKR %d\n", square->houseCost);
     printf("Remaining Balance : LKR %d\n", player->cash);
+}
+
+void constructHotel(Game *game, Player *player, Square *square) {
+    if(square->houses != 4){
+        return;
+    }
+
+    if(square->hotel) { // if hotel == 1
+        return;
+    }
+
+    if(player->cash < square->hotelCost) {
+        return;
+    }
+
+    player->cash -= square->hotelCost;
+
+    square->houses = 0;
+    square->hotel = 1;
+
+    printf("%s built a hotel on %s.\n", player->name, square->name);
 }

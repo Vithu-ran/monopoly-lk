@@ -17,8 +17,10 @@ void handleFreeParking(Game *game, Player *player);
 
 int ownsMonopoly(Game *game, Player *player, PropertyGroup group);
 
+int canBuildHouse(Game *game, Square *square);
+
 void constructHouse(Game *game, Player *player, Square *square);
 
-int canBuildHouse(Game *game, Square *square);
+void constructHotel(Game *game, Player *player, Square *square);
 
 #endif
