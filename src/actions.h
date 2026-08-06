@@ -19,4 +19,6 @@ int ownsMonopoly(Game *game, Player *player, PropertyGroup group);
 
 void constructHouse(Game *game, Player *player, Square *square);
 
+int canBuildHouse(Game *game, Square *square);
+
 #endif

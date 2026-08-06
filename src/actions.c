@@ -103,7 +103,7 @@ void handleUtility(Game *game, Player *player) {
 
             int utilityCount = 0;
             for(int i = 0; i < BOARD_SIZE; i++) {
-                if(game->board[i].type = UTILITY && game->board[i].owner == owner->id) {
+                if(game->board[i].type == UTILITY && game->board[i].owner == owner->id) {
                     utilityCount++;
                 }
             }
@@ -162,12 +162,38 @@ int ownsMonopoly(Game *game, Player *player, PropertyGroup group) {
     return propertyFound;
 }
 
+int canBuildHouse(Game *game, Square *square /*the square that the player is standing on*/) {
+    int minimum = 100;
+
+    for(int i = 0; i < BOARD_SIZE; i++) {
+        Square *currentSquare = &game->board[i];
+
+        if(currentSquare->group != square->group) {
+            continue;
+        }
+
+        if(currentSquare->houses < minimum) {
+            minimum = currentSquare->houses;
+        }
+    }
+
+    return square->houses == minimum;
+}
+
 void constructHouse(Game *game, Player *player, Square *square) {
     if(!ownsMonopoly(game, player, square->group)) { // if ownsMonopoly() returns 0
         return;
     }
 
-    if(player->cash < square->houseCost) {
+    if(!canBuildHouse(game, square)) { // if can't build house
+        return;
+    }
+
+    if(square->houses > 4) {
+        return;
+    }
+
+    if(player->cash < square->houseCost) { // if not enough cash
         return;
     }
 
