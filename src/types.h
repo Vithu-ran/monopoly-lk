@@ -34,12 +34,20 @@ typedef enum {
 } PropertyGroup;
 
 typedef struct {
+    int amount;
+    int interestRate;
+    int roundsRemaining;
+    int active;
+} Loan;
+
+typedef struct {
     int id;
     char *name;
     int position;
     int cash;
     int lastDiceRoll;
     int bankrupt;
+    Loan loan;
 } Player;
 
 typedef struct {
