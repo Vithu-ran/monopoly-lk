@@ -141,6 +141,26 @@ int canTakeLoan(Game *game, Player *player) {
     return 0;
 }
 
+int calculateMaximumLoan(Game *game, Player *player){
+    int collateralValue = 0;
+
+    for(int i = 0; i < BOARD_SIZE; i++) {
+        Square *square = &game->board[i];
+
+        if(square->owner != player->id) {
+            continue;
+        }
+
+        if(square->type != PROPERTY && square->type != RAILWAY && square->type != UTILITY) {
+            continue;
+        }
+
+        collateralValue += square->purchasePrice;
+    }
+
+    return (collateralValue * 75) / 100; // 75% of the collateral velue (later this will be changed to the mortgage value)
+}
+
 void handleBank(Game *game, Player *player) {
     printf("%s arrived at the Bank.\n", player->name);
     printf("Banking services are available.\n");
