@@ -25,6 +25,8 @@ void applyLoanInterest(Player *player);
 
 int repayLoan(Player *player, int amount);
 
+int repayEntireLoan(Player *player);
+
 void handleBank(Game *game, Player *player);
 
 void handleInsurance(Game *game, Player *player);

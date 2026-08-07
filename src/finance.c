@@ -268,6 +268,29 @@ int repayLoan(Player *player, int amount) {
     return 1;
 }
 
+int repayEntireLoan(Player *player) {
+    if(!player->loan.active) {
+        printf("%s has no active loan.\n", player->name);
+        return 0;
+    }
+
+    if(player->cash < player->loan.amount) {
+        printf("%s does not have enough cash to repay the entire loan.\n", player->name);
+        return 0;
+    }
+
+    int repayment = player->loan.amount;
+
+    player->cash -= repayment;
+    player->loan.amount = 0;
+    player->loan.active = 0;
+
+    printf("%s fully repaid the loan: LKR %d.\n", player->name, repayment);
+    printf("Remaining Cash: LKR %d\n", player->cash);
+
+    return 1;
+}
+
 void handleBank(Game *game, Player *player) {
     printf("%s arrived at the Bank.\n", player->name);
     printf("Banking services are available.\n");
