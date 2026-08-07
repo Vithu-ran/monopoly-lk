@@ -161,6 +161,31 @@ int calculateMaximumLoan(Game *game, Player *player){
     return (collateralValue * 75) / 100; // 75% of the collateral velue (later this will be changed to the mortgage value)
 }
 
+void takeLoan(Game *game, Player *player) {
+    if(!canTakeLoan(game, player)) {
+        printf("%s is not eligible for the loan.\n", player->name);
+        return;
+    }
+
+    int maximumLoan = calculateMaximumLoan(game, player);
+
+    if(maximumLoan <= 0) {
+        printf("%s has indufficient collateral for a loan.\n", player->name);
+        return;
+    }
+
+    player->loan.amount = maximumLoan;
+    player->loan.interestRate = 0; // Not implemented yet
+    player->loan.roundsRemaining = 20;
+    player->loan.active = 1;
+
+    player->cash += maximumLoan;
+
+    printf("%s borrowed LKR %d.\n", player->name, maximumLoan);
+    printf("Loan period: %d rounds.\n", player->loan.roundsRemaining);
+    printf("Remaining Cash: LKR %d.\n", player->cash);
+}
+
 void handleBank(Game *game, Player *player) {
     printf("%s arrived at the Bank.\n", player->name);
     printf("Banking services are available.\n");
