@@ -230,6 +230,44 @@ void applyLoanInterest(Player *player) { // later this will be used after implem
     printf("Updated Loan Amount: LKR %d\n", player->loan.amount);
 }
 
+int repayLoan(Player *player, int amount) {
+    if(!player->loan.active) {
+        printf("%s has no active loan.\n", player->name);
+        return 0;
+    }
+
+    if(amount <= 0) {
+        printf("Invalid repayment amount.\n");
+        return 0;
+    }
+
+    if(amount > player->cash) {
+        printf("%s does not have enough cash to repay LKR %d.\n", player->name, amount);
+
+        return 0;
+    }
+
+    if(amount > player->loan.amount) {
+        printf("Repayment cannot exceed the outstanding loan.\n");
+        return 0;
+    }
+
+    player->cash -= amount;
+    player->loan.amount -= amount;
+
+    printf("%s repaid LKR %d of the loan.\n", player->name, amount);
+    printf("Remaining Loan: LKR %d\n", player->loan.amount);
+    printf("Remaining Cash: LKR %d\n", player->cash);
+
+    if(player->loan.amount == 0) {
+        player->loan.active = 0;
+
+        printf("%s has fully repaid the loan.\n", player->name);
+    }
+
+    return 1;
+}
+
 void handleBank(Game *game, Player *player) {
     printf("%s arrived at the Bank.\n", player->name);
     printf("Banking services are available.\n");
