@@ -221,6 +221,14 @@ void decreaseLoadPeriod(Player *player) {
     printf("%s's loan has %d rounds remaining.\n", player->name, player->loan.roundsRemaining);
 }
 
+int isLoanDue(Player *player) { // implementing this seperately helps other functions call this easily
+    if(!player->loan.active) {
+        return 0;
+    }
+
+    return player->loan.roundsRemaining == 0;
+}
+
 int calculateLoanInterest(Player *player) {
     if(!player->loan.active) {
         return 0;

@@ -21,6 +21,8 @@ void takeLoan(Game *game, Player *player);
 
 void decreaseLoadPeriod(Player *player);
 
+int isLoanDue(Player *player);
+
 int calculateLoanInterest(Player *player);
 
 void applyLoanInterest(Player *player);
