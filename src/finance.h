@@ -19,6 +19,8 @@ int getInterestRate(EconomicCondition condition);
 
 void takeLoan(Game *game, Player *player);
 
+void decreaseLoadPeriod(Player *player);
+
 int calculateLoanInterest(Player *player);
 
 void applyLoanInterest(Player *player);

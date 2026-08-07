@@ -200,12 +200,25 @@ void takeLoan(Game *game, Player *player) {
     player->loan.interestRate = getInterestRate(game->economicCondition);
     player->loan.roundsRemaining = 20;
     player->loan.active = 1;
+    player->loan.roundsRemaining = 20;
 
     player->cash += maximumLoan;
 
     printf("%s borrowed LKR %d.\n", player->name, maximumLoan);
     printf("Loan period: %d rounds.\n", player->loan.roundsRemaining);
     printf("Remaining Cash: LKR %d.\n", player->cash);
+}
+
+void decreaseLoadPeriod(Player *player) {
+    if(!player->loan.active) {
+        return;
+    }
+
+    if(player->loan.roundsRemaining > 0) {
+        player->loan.roundsRemaining--;
+    }
+
+    printf("%s's loan has %d rounds remaining.\n", player->name, player->loan.roundsRemaining);
 }
 
 int calculateLoanInterest(Player *player) {
