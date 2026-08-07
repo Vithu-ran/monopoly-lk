@@ -208,6 +208,14 @@ void takeLoan(Game *game, Player *player) {
     printf("Remaining Cash: LKR %d.\n", player->cash);
 }
 
+int calculateLoanInterest(Player *player) {
+    if(!player->loan.active) {
+        return 0;
+    }
+
+    return (player->loan.amount * player->loan.interestRate) / 100;
+}
+
 void handleBank(Game *game, Player *player) {
     printf("%s arrived at the Bank.\n", player->name);
     printf("Banking services are available.\n");

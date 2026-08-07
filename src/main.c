@@ -20,10 +20,11 @@ int main(void) {
 
 #if TEST_MODE
 
-    game.board[1].owner = 0;
-    game.board[3].owner = 0;
-
-    constructHouse(&game, &game.players[0], &game.board[1]);
+    game.players[0].loan.active = 1;
+    game.players[0].loan.amount = 10000;
+    game.economicCondition = STABLE_ECONOMY;
+    game.players[0].loan.interestRate = 8;
+    printf("%d\n", calculateLoanInterest(&game.players[0]));
 
 
 #else 
