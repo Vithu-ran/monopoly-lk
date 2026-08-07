@@ -11,6 +11,7 @@ typedef struct {
     int turnOrder[PLAYER_COUNT]; // Stores index of the players array
     int incomeTaxRate; // percentage
     int communityTaxRate; //percentage
+    EconomicCondition economicCondition;
 } Game;
 
 
@@ -32,6 +33,8 @@ void printTurnOrder(Game *game, int firstPlayer);
 void takeTurn(Game *game, Player *player);
 
 void handleLanding(Game *game, Player *player);
+
+
 
 void playGame(Game *game);
 

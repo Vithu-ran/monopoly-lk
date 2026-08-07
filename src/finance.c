@@ -161,6 +161,28 @@ int calculateMaximumLoan(Game *game, Player *player){
     return (collateralValue * 75) / 100; // 75% of the collateral velue (later this will be changed to the mortgage value)
 }
 
+int getInterestRate(EconomicCondition condition) {
+    switch(condition) {
+        case ECONOMIC_BOOM:
+            return 5;
+
+        case STABLE_ECONOMY:
+            return 8;
+
+        case MODERATE_INFLATION:
+            return 10;
+
+        case HIGH_INFLATION:
+            return 12;
+
+        case ECONOMIC_RECESSION:
+            return 15;
+
+        default:
+            return 8;
+    }
+}
+
 void takeLoan(Game *game, Player *player) {
     if(!canTakeLoan(game, player)) {
         printf("%s is not eligible for the loan.\n", player->name);
@@ -175,7 +197,7 @@ void takeLoan(Game *game, Player *player) {
     }
 
     player->loan.amount = maximumLoan;
-    player->loan.interestRate = 0; // Not implemented yet
+    player->loan.interestRate = getInterestRate(game->economicCondition);
     player->loan.roundsRemaining = 20;
     player->loan.active = 1;
 

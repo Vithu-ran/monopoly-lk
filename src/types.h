@@ -33,6 +33,14 @@ typedef enum {
     DARK_BLUE
 } PropertyGroup;
 
+typedef enum {
+    ECONOMIC_BOOM,
+    STABLE_ECONOMY,
+    MODERATE_INFLATION,
+    HIGH_INFLATION,
+    ECONOMIC_RECESSION
+} EconomicCondition;
+
 typedef struct {
     int amount;
     int interestRate;

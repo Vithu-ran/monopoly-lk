@@ -15,6 +15,8 @@ int canTakeLoan(Game *game, Player *player);
 
 int calculateMaximumLoan(Game *game, Player *player);
 
+int getInterestRate(EconomicCondition condition);
+
 void takeLoan(Game *game, Player *player);
 
 void handleBank(Game *game, Player *player);

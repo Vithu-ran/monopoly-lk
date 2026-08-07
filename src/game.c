@@ -12,6 +12,8 @@ void initializeGame(Game *game) {
 
     game->incomeTaxRate = 15; // percentage
     game->communityTaxRate = 10; // percentage
+
+    game->economicCondition = STABLE_ECONOMY;
 }
 
 void printIntroduction(const Game *game) { // const - to void accidental edits
