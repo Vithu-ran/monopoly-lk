@@ -216,6 +216,20 @@ int calculateLoanInterest(Player *player) {
     return (player->loan.amount * player->loan.interestRate) / 100;
 }
 
+void applyLoanInterest(Player *player) { // later this will be used after implementing round calcualtion
+    if(!player->loan.active) {
+        return;
+    }
+
+    int interest = calculateLoanInterest(player);
+
+    player->loan.amount += interest;
+
+    printf("%s's loan accrued LKR %d interest.\n", player->name, interest);
+
+    printf("Updated Loan Amount: LKR %d\n", player->loan.amount);
+}
+
 void handleBank(Game *game, Player *player) {
     printf("%s arrived at the Bank.\n", player->name);
     printf("Banking services are available.\n");

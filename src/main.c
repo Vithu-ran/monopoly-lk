@@ -8,7 +8,7 @@
 #include "finance.h"
 #include "players.h"
 
-#define TEST_MODE 0
+#define TEST_MODE 1
 
 int main(void) {
     
@@ -24,8 +24,11 @@ int main(void) {
     game.players[0].loan.amount = 10000;
     game.economicCondition = STABLE_ECONOMY;
     game.players[0].loan.interestRate = 8;
-    printf("%d\n", calculateLoanInterest(&game.players[0]));
 
+    applyLoanInterest(&game.players[0]);
+    printf("%d\n", game.players[0].loan.amount);
+    applyLoanInterest(&game.players[0]);
+    printf("%d\n", game.players[0].loan.amount);
 
 #else 
 
